@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PreviousPasswords;
 use App\Entity\Student;
+use App\Entity\User;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use function Sodium\add;
 
 #[Route('/etudiant')]
 class StudentController extends AbstractController
@@ -110,6 +112,14 @@ class StudentController extends AbstractController
             'student' => $student,
             'grades' => $student->getGrades()
 
+        ]);
+    }
+
+    #[Route('/{id}/profs', name: 'app_student_profs', methods: ['GET', 'POST'])]
+    public function profs(Student $student, EntityManagerInterface $entityManager, User $user): Response
+    {
+        return $this->render('student/profs.html.twig', [
+            //'profs' => $student->
         ]);
     }
 }

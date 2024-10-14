@@ -74,4 +74,14 @@ class Student extends User
         }
         return null;
     }
+
+    public function getAvgNote() {
+        $notes = $this->getGrades();
+        $sum = 0;
+        foreach ($notes as $note) {
+            $sum += $note->getGrade();
+        }
+
+        return $sum / count($notes);
+    }
 }

@@ -6,6 +6,7 @@ use App\Entity\ClassLevel;
 use App\Entity\Evaluation;
 use App\Entity\Professor;
 use App\Entity\Subject;
+use App\Entity\Categorie;
 use App\Repository\ClassLevelRepository;
 use App\Repository\SubjectRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -60,6 +61,15 @@ class EvaluationType extends AbstractType
                 'query_builder' => function(ClassLevelRepository $er) use($prof){
                     return $er->findByProfessor($prof);
                 },
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'placeholder' => 'Sélectionner une catégorie',
+                'label' => 'Catégorie',
+                'choice_label' => 'libellle',
+                'multiple' => false,
+                'expanded' => false,
+                'mapped' => false,
             ])
         ;
     }

@@ -17,6 +17,7 @@ class ConfigProfController extends AbstractController
     #[Route('/configprof/{id}', name: 'app_config_prof')]
     public function index(Request $request, EntityManagerInterface $entityManager, Professor $professor): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $formProfs = $this->createForm(ConfigProfType::class, $professor);
         $formProfs->handleRequest($request);
 
@@ -33,6 +34,7 @@ class ConfigProfController extends AbstractController
     #[Route('/configprof/', name: 'app_config_prof_subject')]
     public function configProfSubject(Request $request, EntityManagerInterface $entityManager, ?Professor $professor): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $formProfs = $this->createForm(ConfigProfType::class, $professor);
         $formProfs->remove('subjects');
         $formProfs->remove('classes');
