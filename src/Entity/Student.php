@@ -78,8 +78,11 @@ class Student extends User
     public function getAvgNote() {
         $notes = $this->getGrades();
         $sum = 0;
-        foreach ($notes as $note) {
-            $sum += $note->getGrade();
+        foreach ($this->getGrades() as $note) {
+            $bareme = $note->getEvaluation()->getBareme();
+            $bidule = $bareme / 20;
+            $note = $note / $bidule;
+            $sum += $note;
         }
 
         return $sum / count($notes);
